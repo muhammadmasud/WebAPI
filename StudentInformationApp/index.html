@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Info</title>
+    <meta charset="utf-8"/>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var ulStudent = $('#ulStudent');
+            $('#btn').click(function() {
+                $('#btn').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'api/Student',
+                        dataType: 'json',
+                        success: function(data) {
+                            ulStudent.empty();
+                            $.each(data, function(index, val) {
+                                var fullName = val.FirstName + ' ' + val.LastName;
+                                ulStudent.append('<li>' +fullName+'</li>');
+                            });
+                        }
+                    });
+                });
+
+                $('#btnClear').click(function() {
+                    ulStudent.empty();
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="btn" type="button" value="Show all Student" />
+<input id="btnClear" type="button" value="Clear Field"/>
+<ul id="ulStudent"></ul>
+</body>
+</html>
